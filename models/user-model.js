@@ -38,13 +38,13 @@ module.exports = {
 	},
 	insert: function(user, callback){
 
-		var sql ="insert into user values('', '"+ user.username+"', '"+user.password+"')";
+		var sql ="insert into employee values('', '"+ user.username+"', '"+user.password+"')";
 		db.execute(sql, function(status){
 			callback(status);
 		});
 	},
 	update: function(user, callback){
-		var sql ="update user set username='"+ user.username+"', password='"+user.password+"' where id="+user.id;
+		var sql ="update user set employee='"+ user.username+"', password='"+user.password+"' where id="+user.id;
 		
 		console.log(sql);
 
@@ -53,7 +53,7 @@ module.exports = {
 		});
 	},
 	delete: function(id, callback){
-		var sql = "delete from user where id="+id;
+		var sql = "delete from employee where id="+id;
 		db.execute(sql, function(status){
 			callback(status);
 		});
