@@ -5,7 +5,7 @@ var getConnection = function(callback){
 	  host     : 'localhost',
 	  user     : 'root',
 	  password : '',
-	  database : 'node1'
+	  database : 'atp3db'
 	});
 	 
 	connection.connect(function(err) {
@@ -21,52 +21,29 @@ var getConnection = function(callback){
 
 module.exports = {
 
-	getResults : function(sql, params,callback){
+	getResults : function(sql, callback){
 		getConnection(function (connection){
-
-			if(params != null){
-				connection.query(sql, params, function (error, results) {
-					callback(results);
-				});
-				connection.end(function(err){
-					console.log('connection end...');
-				});
-			}else{
-				connection.query(sql, function (error, results) {
-					callback(results);
-				});
-				connection.end(function(err){
-					console.log('connection end...');
-				});
-			}
+			connection.query(sql, function (error, results) {
+				callback(results);
+			});
+			connection.end(function(err){
+				console.log('connection end...');
+			});	
 		});
 	},
-	execute : function(sql, params, callback){
+	execute : function(sql, callback){
 		getConnection(function (connection){
-
-			if(params != null){
-				connection.query(sql, params, function (error, results) {
-					if(error){
-						callback(false);
-					}else{
-						callback(true);
-					}
-				});
-				connection.end(function(err){
-					console.log('connection end...');
-				});
-			}else{
-				connection.query(sql, function (error, results) {
-					if(error){
-						callback(false);
-					}else{
-						callback(true);
-					}
-				});
-				connection.end(function(err){
-					console.log('connection end...');
-				});
-			}
+			connection.query(sql, function (error, results) {
+				
+				if(error){
+					callback(false);
+				}else{
+					callback(true);
+				}
+			});
+			connection.end(function(err){
+				console.log('connection end...');
+			});	
 		});
 	}
 }

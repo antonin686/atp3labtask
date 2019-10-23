@@ -4,16 +4,6 @@ var userModel = require('./../models/user-model');
 var router = express.Router();
 
 
-router.get('*', function(request, response, next){
-
-	if(request.cookies['username'] != null){
-		next();
-	}else{
-		response.redirect('/logout');
-	}
-
-});
-
 router.get('/adduser', function(request, response){
 	response.render("user/adduser");
 });
@@ -21,7 +11,11 @@ router.get('/adduser', function(request, response){
 router.get('/userList', function(request, response){
 		
 		userModel.getAll(function(results){
-			response.render('user/index', {users: results});		
+			if(request.cookies['username'] != null){
+				response.render('user/index', {users: results});		
+			}else{
+				response.redirect('/logout');
+			}
 		});	
 });
 

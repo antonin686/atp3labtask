@@ -26,10 +26,15 @@ app.use('/logout', logout);
 
 //ROUTER
 app.get('/', function(request, response){
-	response.render('login');
+	response.redirect('/login')
 });
 
+app.get('/test/your/:name/:id', function(request, response){
+	var id = request.params.id;
+	var name = request.params.name;
+	response.send(id+" "+name);
 
+});
 
 
 //SERVER STARTUP

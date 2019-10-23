@@ -1,6 +1,7 @@
 var express = require('express');
 var userModel = require('./../models/user-model');
 var router = express.Router();
+var mysql = require('mysql');
 
 router.get('/', function(request, response){
 	response.render('login/index');
@@ -15,6 +16,7 @@ router.post('/', function(request, response){
 
 	userModel.validate(user, function(status){
 		if(status){
+			
 			response.cookie('username', request.body.username);
 			response.redirect('/home');
 		}else{
